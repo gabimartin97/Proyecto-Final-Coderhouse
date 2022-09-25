@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
      
     public void OnClickPlay()
     {
-       // SceneManager.LoadScene("EscenaDemoShooter");
+       SceneManager.LoadScene("MainScene");
     }
 
     public void OnClickSpawnLevel()
