@@ -5,16 +5,16 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     private float health = 100f;
-    [SerializeField] GameObject Weapon;
-    [SerializeField] Transform WeaponHand;
-
+    [SerializeField] GameObject weaponInHand;
+    [SerializeField] Transform weaponHand;
+    [SerializeField] List<GameObject> weaponList;
     public float Health { get => health; set => health = value; }
 
     // Start is called before the first frame update
     void Start()
     {
-        
-        
+        weaponList = new List<GameObject>();
+
     }
 
     // Update is called once per frame
@@ -25,6 +25,27 @@ public class PlayerBehaviour : MonoBehaviour
             GameManager.IsGameOver = true;
             gameObject.SetActive(false);
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+           if(weaponList.Count > 0) WeaponToHand(weaponList[0]);
+
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+
+            if (weaponList.Count > 1) WeaponToHand(weaponList[1]);
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+
+            if (weaponList.Count > 2) WeaponToHand(weaponList[2]);
+
+        }
+
+
     }
     public void RecieveDamage(float damage)
     {
@@ -36,14 +57,29 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Weapon"))
         {
-            Destroy(Weapon); //Destruye el arma que tiene en la mano. Mejorar
-            Weapon = collision.gameObject;
-            Weapon.transform.SetParent(WeaponHand);
-            Weapon.transform.localPosition = Vector3.zero;
-            Weapon.transform.localRotation = Quaternion.identity;
-            Weapon.GetComponent<Gun>().enabled = true;
-            Weapon.GetComponent<Gun>().PlayerRb = GetComponent<Rigidbody>();
+           GameObject pickedUpWeapon = collision.gameObject;
+                      
+            pickedUpWeapon.SetActive(false);
+            weaponList.Add(pickedUpWeapon);
+        }
+    }
 
+    private void WeaponToHand(GameObject weapon)
+    {
+        DisableAllWeapon();
+        weapon.SetActive(true);
+        weapon.transform.SetParent(weaponHand);
+        weapon.transform.localPosition = Vector3.zero;
+        weapon.transform.localRotation = Quaternion.identity;
+        weapon.GetComponent<Gun>().enabled = true;
+        weapon.GetComponent<Gun>().PlayerRb = GetComponent<Rigidbody>();
+        weaponInHand = weapon;
+    }
+    private void DisableAllWeapon()
+    {
+        foreach (GameObject Weapon in weaponList)
+        {
+            Weapon.SetActive(false);
         }
     }
 }
