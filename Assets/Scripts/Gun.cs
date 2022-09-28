@@ -12,6 +12,18 @@ public class Gun : MonoBehaviour
     //Graphics
     [SerializeField] GameObject muzzleFlash;
 
+    [SerializeField] AudioClip[] gunClips;
+
+    AudioSource sound;
+
+    private enum gunSound
+    {
+        fire,
+        reload,
+        pickup,
+        count
+    }
+    
     int bulletsLeft, bulletsShot;
     private Transform attackPoint;
     private Rigidbody playerRb;
@@ -33,6 +45,7 @@ public class Gun : MonoBehaviour
     {
         ammunitionDisplay = GameObject.Find("AmmoText").GetComponent<TextMeshProUGUI>();
         attackPoint = transform.Find("Nozzle");
+        sound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -95,6 +108,8 @@ public class Gun : MonoBehaviour
 
         bulletsLeft--;
         bulletsShot++;
+        PlayFireSound();
+        
 
         //Invoke resetShot function (if not already invoked), with your timeBetweenShooting
         if (allowInvoke)
@@ -119,6 +134,7 @@ public class Gun : MonoBehaviour
     private void Reload()
     {
         reloading = true;
+        PlayReloadSound();
         Invoke("ReloadFinished", data.reloadTime); //Invoke ReloadFinished function with your reloadTime as delay
     }
     private void ReloadFinished()
@@ -126,5 +142,23 @@ public class Gun : MonoBehaviour
         //Fill magazine
         bulletsLeft = data.magazineSize;
         reloading = false;
+    }
+
+
+    void PlayFireSound()
+    {
+        sound.clip = gunClips[(int)gunSound.fire];
+        sound.Play();
+    }
+    void PlayReloadSound()
+    {
+        sound.clip = gunClips[(int)gunSound.reload];
+        sound.Play();
+    }
+
+    public void PlayPickupSound()
+    {
+        sound.clip = gunClips[(int)gunSound.pickup];
+        sound.Play();
     }
 }

@@ -58,7 +58,6 @@ public class PlayerBehaviour : MonoBehaviour
         if(collision.gameObject.CompareTag("Weapon"))
         {
            GameObject pickedUpWeapon = collision.gameObject;
-                      
             pickedUpWeapon.SetActive(false);
             weaponList.Add(pickedUpWeapon);
         }
@@ -74,6 +73,7 @@ public class PlayerBehaviour : MonoBehaviour
         weapon.GetComponent<Gun>().enabled = true;
         weapon.GetComponent<Gun>().PlayerRb = GetComponent<Rigidbody>();
         weaponInHand = weapon;
+       
     }
     private void DisableAllWeapon()
     {
