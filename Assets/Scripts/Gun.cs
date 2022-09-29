@@ -10,12 +10,12 @@ public class Gun : MonoBehaviour
     //bullet 
     [SerializeField] GameObject bullet;
     //Graphics
-    [SerializeField] GameObject muzzleFlash;
+    [SerializeField] ParticleSystem muzzleFlash;
 
     [SerializeField] AudioClip[] gunClips;
 
     AudioSource sound;
-
+     
     private enum gunSound
     {
         fire,
@@ -46,6 +46,7 @@ public class Gun : MonoBehaviour
         ammunitionDisplay = GameObject.Find("AmmoText").GetComponent<TextMeshProUGUI>();
         attackPoint = transform.Find("Nozzle");
         sound = GetComponent<AudioSource>();
+       
     }
 
     // Update is called once per frame
@@ -102,14 +103,11 @@ public class Gun : MonoBehaviour
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * data.shootForce, ForceMode.Impulse);
         //currentBullet.GetComponent<Rigidbody>().AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
 
-        //Instantiate muzzle flash, if you have one
-        if (muzzleFlash != null)
-           Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
-
+        
         bulletsLeft--;
         bulletsShot++;
         PlayFireSound();
-        
+        muzzleFlash.Play();
 
         //Invoke resetShot function (if not already invoked), with your timeBetweenShooting
         if (allowInvoke)
