@@ -9,7 +9,7 @@ public class SpecialEnemy : EnemyBehaviour
     new static public event Action<int> OnDead;
     public override void RecieveDamage(float damage)
     {
-        health -= damage;
+        data.life -= damage;
         Warp();
     }
     private void Warp()
@@ -22,7 +22,7 @@ public class SpecialEnemy : EnemyBehaviour
     {
 
         Attack();
-        if (health <= 0)
+        if (data.life <= 0)
         {
             Destroy(gameObject);
             OnDead.Invoke(1);

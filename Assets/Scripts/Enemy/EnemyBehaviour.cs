@@ -4,10 +4,10 @@ using System;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    [SerializeField] protected float health = 100f;
-    [SerializeField] protected float damage = 10f;
-    [SerializeField] protected float damageCooldown = 0.5f;
-    // Start is called before the first frame update
+    
+   
+    
+   [SerializeField] protected EnemyData data;
     protected bool damageInCooldown = false;
     protected float damageCooldownTimer = 0f;
 
@@ -22,7 +22,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
 
         Attack();
-        if (health <= 0)
+        if ( data.life<= 0)
         {
             Destroy(gameObject);
             OnDead.Invoke(1);
@@ -38,7 +38,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             if (!damageInCooldown)
             {
-                collision.gameObject.GetComponent<PlayerBehaviour>().RecieveDamage(damage);
+                collision.gameObject.GetComponent<PlayerBehaviour>().RecieveDamage(data.damage);
                 damageInCooldown = true;
             }
 
@@ -47,7 +47,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public virtual void RecieveDamage(float damage)
     {
-        health -= damage;
+        data.life -= damage;
     }
 
     protected void Attack()
@@ -55,7 +55,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (damageInCooldown)
         {
             damageCooldownTimer += Time.deltaTime;
-            if (damageCooldownTimer >= damageCooldown)
+            if (damageCooldownTimer >= data.damageCooldown)
             {
                 damageInCooldown = false;
                 damageCooldownTimer = 0f;

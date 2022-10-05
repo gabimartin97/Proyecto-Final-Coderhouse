@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f2b148b7bf4694799723cf33216800, type: 3}
+  m_Name: Shotgun
+  m_EditorClassIdentifier: 
+  shootForce: 50
+  recoilForce: 60
+  damage: 10
+  timeBetweenShooting: 1
+  reloadTime: 2.5
+  timeBetweenShots: 0.01
+  spread: 0.4
+  magazineSize: 25
+  bulletsPerTap: 5
+  allowButtonHold: 0
