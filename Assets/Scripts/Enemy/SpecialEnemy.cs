@@ -16,9 +16,8 @@ public class SpecialEnemy : EnemyBehaviour
 
     private void Warp() 
     {
-
         Vector3 newPosition = transform.position -  new Vector3(UnityEngine.Random.Range(-4, 4), 0, UnityEngine.Random.Range(-4, 4));
-        gameObject.GetComponent<NavMeshAgent>().Warp(newPosition);
+        agent.Warp(newPosition);
     }
 
     void Update()

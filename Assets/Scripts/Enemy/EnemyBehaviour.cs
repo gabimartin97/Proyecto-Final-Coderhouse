@@ -1,25 +1,31 @@
 using UnityEngine;
 using System;
-
+using UnityEngine.AI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
         
     [SerializeField] protected EnemyData data;
 
-     protected float health;
-     protected float damage;
-     protected float damageCooldown;
-      
+    protected float health;
+    protected float damage;
+    protected float damageCooldown;
+    protected float speed;
     protected bool damageInCooldown = false;
     protected float damageCooldownTimer = 0f;
 
+    protected NavMeshAgent agent;
     static public event Action<int> OnDead;
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+
         health = data.life;
         damage = data.damage;
         damageCooldown = data.damageCooldown;
+        speed = data.speed;
+        agent.speed = speed;
+
       
     }
 
@@ -54,7 +60,7 @@ public class EnemyBehaviour : MonoBehaviour
     public virtual void RecieveDamage(float damage)
     {
         health -= damage;
-       
+        
     }
 
     protected void Attack()

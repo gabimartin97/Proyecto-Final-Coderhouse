@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62230a26c4b04b040a8b6fb25d44c2f8, type: 3}
-  m_Name: TankEnemy
+  m_Name: EliteEnemy
   m_EditorClassIdentifier: 
-  life: 300
-  damageCooldown: 2.5
-  damage: 30
-  speed: 1.75
+  life: 100
+  damageCooldown: 1
+  damage: 33
+  speed: 7
