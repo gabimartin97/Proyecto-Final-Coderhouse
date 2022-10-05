@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62230a26c4b04b040a8b6fb25d44c2f8, type: 3}
   m_Name: BaseEnemy
   m_EditorClassIdentifier: 
-  life: 100
+  life: 50
   damageCooldown: 5
   damage: 25
