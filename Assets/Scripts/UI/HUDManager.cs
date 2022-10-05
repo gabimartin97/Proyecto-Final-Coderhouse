@@ -12,17 +12,15 @@ public class HUDManager : MonoBehaviour
     [SerializeField] GameObject gameOverObject;
     TextMeshProUGUI pointsText;
     Slider healthBar;
-    GameObject playerObject;
-    PlayerBehaviour playerBehaviourScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerObject = GameObject.FindGameObjectWithTag("Player");
-        playerBehaviourScript = playerObject.GetComponent<PlayerBehaviour>();
+        PlayerBehaviour.OnHealthChange += OnHealthChangeManager; //Me suscribo al evento
+
         pointsText = pointsIndicatorObject.GetComponent<TextMeshProUGUI>();
         healthBar = healthBarObject.GetComponent<Slider>();
-        healthBar.maxValue = playerBehaviourScript.Health;
+        OnHealthChangeManager(100f, 100f);
     }   
     
 
@@ -31,8 +29,13 @@ public class HUDManager : MonoBehaviour
     {
 
         pointsText.SetText(GameManager.Score.ToString());
-        healthBar.value = playerBehaviourScript.Health;
+
         if (GameManager.IsGameOver) gameOverObject.SetActive(true);
+    }
+    private void OnHealthChangeManager(float actualHealth, float totalHealth)
+    {
+        healthBar.maxValue = totalHealth;
+        healthBar.value = actualHealth;
 
     }
 }
