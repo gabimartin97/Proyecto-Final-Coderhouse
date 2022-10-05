@@ -4,17 +4,23 @@ using System;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    
-   
-    
-   [SerializeField] protected EnemyData data;
+        
+    [SerializeField] protected EnemyData data;
+
+     protected float health;
+     protected float damage;
+     protected float damageCooldown;
+      
     protected bool damageInCooldown = false;
     protected float damageCooldownTimer = 0f;
 
     static public event Action<int> OnDead;
     void Start()
     {
-
+        health = data.life;
+        damage = data.damage;
+        damageCooldown = data.damageCooldown;
+      
     }
 
     // Update is called once per frame
@@ -22,11 +28,11 @@ public class EnemyBehaviour : MonoBehaviour
     {
 
         Attack();
-        if ( data.life<= 0)
+        if (health <= 0)
         {
+            OnDead?.Invoke(1); //el signo ? es para preguntarse si hay suscriptores al evento, sino da error
             Destroy(gameObject);
-            OnDead.Invoke(1);
-
+            
         }
 
 
@@ -38,7 +44,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             if (!damageInCooldown)
             {
-                collision.gameObject.GetComponent<PlayerBehaviour>().RecieveDamage(data.damage);
+                collision.gameObject.GetComponent<PlayerBehaviour>().RecieveDamage(damage);
                 damageInCooldown = true;
             }
 
@@ -47,7 +53,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     public virtual void RecieveDamage(float damage)
     {
-        data.life -= damage;
+        health -= damage;
+       
     }
 
     protected void Attack()
@@ -55,7 +62,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (damageInCooldown)
         {
             damageCooldownTimer += Time.deltaTime;
-            if (damageCooldownTimer >= data.damageCooldown)
+            if (damageCooldownTimer >= damageCooldown)
             {
                 damageInCooldown = false;
                 damageCooldownTimer = 0f;

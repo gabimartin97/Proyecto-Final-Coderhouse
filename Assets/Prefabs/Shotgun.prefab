@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6293c09dc2baf3a4c88c956e0a8cfae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: cb1fc3413df755e468e518120e6f9781, type: 2}
+  data: {fileID: 11400000, guid: fce8e8b550c7fbf439d4bd6bbf1b4f13, type: 2}
   bullet: {fileID: 2552734773647534685, guid: c9dff4097d9ea6243bce52467ab1842c, type: 3}
   muzzleFlash: {fileID: 1580298336161597758}
   gunClips:
