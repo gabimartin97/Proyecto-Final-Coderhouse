@@ -6,6 +6,7 @@ public class EnemyAgent : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
     private GameObject target;
+    [SerializeField] Animator enemyAnimator;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,15 +17,16 @@ public class EnemyAgent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(! GameManager.IsGameOver)
+        if (!GameManager.IsGameOver)
         {
             Vector3 direction = target.transform.position - transform.position;
+
             if (direction.magnitude >= 2f)
             {
                 navMeshAgent.SetDestination(target.transform.position);
             }
         }
-        
-        
+
+
     }
 }
