@@ -22,4 +22,11 @@ public class EnemyData : ScriptableObject
     [Range(0.5f, 20f)]
     public float speed = 4f;
 
+    [SerializeField]
+    [Range(0.5f, 200f)]
+    public float trackDistance = 12f;
+
+    [SerializeField]
+    [Range(0.5f, 5f)]
+    public float wanderTime = 3f;  //tiempo para cambiar de direccion al patrullar
 }

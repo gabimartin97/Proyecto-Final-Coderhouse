@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a6e067889b0bc4bb23150d8391a76f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAnimator: {fileID: 2015569917845353556}
+  data: {fileID: 11400000, guid: 5cad17be1b6694f4993ba2d4cbcc3bff, type: 2}
 --- !u!1001 &2015569917854761268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -220,11 +220,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 940f8413404e20b4b906dfb2ab68ad8f, type: 3}
---- !u!95 &2015569917845353556 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9500000, guid: 940f8413404e20b4b906dfb2ab68ad8f, type: 3}
-  m_PrefabInstance: {fileID: 2015569917854761268}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2015569917854899190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400066, guid: 940f8413404e20b4b906dfb2ab68ad8f, type: 3}
