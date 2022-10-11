@@ -6,6 +6,7 @@ public class EnemyBehaviour : MonoBehaviour
 {
         
     [SerializeField] protected EnemyData data;
+    [SerializeField] Animator enemyAnimator;
 
     protected float health;
     protected float damage;
@@ -13,27 +14,43 @@ public class EnemyBehaviour : MonoBehaviour
     protected float speed;
     protected bool damageInCooldown = false;
     protected float damageCooldownTimer = 0f;
-
-    protected NavMeshAgent agent;
+    protected NavMeshAgent navMeshAgent;
+    private GameObject target;
+    private float wanderTimer = 0f;
+    private bool isAttacking = false;
     static public event Action<int> OnDead;
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        target = GameObject.FindGameObjectWithTag("Player");
 
         health = data.life;
         damage = data.damage;
         damageCooldown = data.damageCooldown;
         speed = data.speed;
-        agent.speed = speed;
-
-      
+        navMeshAgent.speed = speed;
+              
     }
 
     // Update is called once per frame
     void Update()
     {
+            
+        Move();
+        SetAnimationState();
 
-        Attack();
+
+        if (damageInCooldown)
+        {
+            damageCooldownTimer += Time.deltaTime;
+            if (damageCooldownTimer >= damageCooldown)
+            {
+                damageInCooldown = false;
+                isAttacking = false;
+                damageCooldownTimer = 0f;                
+            }
+        }
+        
         if (health <= 0)
         {
             OnDead?.Invoke(1); //el signo ? es para preguntarse si hay suscriptores al evento, sino da error
@@ -48,12 +65,8 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (!damageInCooldown)
-            {
-                collision.gameObject.GetComponent<PlayerBehaviour>().RecieveDamage(damage);
-                damageInCooldown = true;
-            }
-
+            Attack(collision);
+            
         }
     }
 
@@ -63,16 +76,67 @@ public class EnemyBehaviour : MonoBehaviour
         
     }
 
-    protected void Attack()
+    protected void Attack(Collision collision)
     {
-        if (damageInCooldown)
+        if (!damageInCooldown)
         {
-            damageCooldownTimer += Time.deltaTime;
-            if (damageCooldownTimer >= damageCooldown)
+            collision.gameObject.GetComponent<PlayerBehaviour>().RecieveDamage(damage);
+            isAttacking = true;
+            damageInCooldown = true;
+        }
+    }
+
+    protected void Move()
+    {
+        if (!GameManager.IsGameOver)
+        {
+            Vector3 direction = target.transform.position - transform.position;
+            if (direction.magnitude <= data.trackDistance)
             {
-                damageInCooldown = false;
-                damageCooldownTimer = 0f;
+                if (direction.magnitude >= 2f)
+                {
+                    navMeshAgent.SetDestination(target.transform.position);
+                }
             }
+            else
+            {
+                wanderTimer += Time.deltaTime;
+                if (wanderTimer >= data.wanderTime)
+                {
+                    wanderTimer = 0f;
+                    Wander(); //Patrullar
+                }
+
+            }
+        }
+    }
+
+    void Wander() //Se mueve a una posicion aleatora para simular patrulla
+    {
+        navMeshAgent.SetDestination(transform.position + new Vector3(UnityEngine.Random.Range(-4, 4), 0, UnityEngine.Random.Range(-4, 4)));
+
+    }
+
+    void SetAnimationState()
+    {
+        if(isAttacking)
+        {
+         enemyAnimator.SetBool("isAttacking", true);
+        }
+        else
+        {
+        enemyAnimator.SetBool("isAttacking", false);
+        }
+        if (navMeshAgent.remainingDistance >= 0.5)
+        {
+            enemyAnimator.SetBool("isRunning", true);
+
+        }
+        else
+        {
+            
+            enemyAnimator.SetBool("isRunning", false);
+
         }
     }
 }

@@ -9,6 +9,8 @@ public class EnemyAgent : MonoBehaviour
     private float wanderTimer =0f;
     
     [SerializeField] private EnemyData data;
+    [SerializeField] Animator enemyAnimator;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +39,19 @@ public class EnemyAgent : MonoBehaviour
                     wanderTimer = 0f;
                     Wander(); //Patrullar
                 }
+                
             }
+        }
+
+        if(navMeshAgent.remainingDistance >= 0.5)
+        {
+            enemyAnimator.SetBool("isRunning", true);
+            //Debug.Log("has path");
+        }
+        else
+        {
+            enemyAnimator.SetBool("isRunning", false);
+            Debug.Log("has NOT path");
         }
 
 
@@ -47,6 +61,11 @@ public class EnemyAgent : MonoBehaviour
     {
         navMeshAgent.SetDestination(transform.position + new Vector3(UnityEngine.Random.Range(-4, 4), 0, UnityEngine.Random.Range(-4, 4)));
        
-    } 
+    }
 
+    
+        
+            
+
+    
 }

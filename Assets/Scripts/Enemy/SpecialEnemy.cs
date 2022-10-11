@@ -17,20 +17,7 @@ public class SpecialEnemy : EnemyBehaviour
     private void Warp() 
     {
         Vector3 newPosition = transform.position -  new Vector3(UnityEngine.Random.Range(-4, 4), 0, UnityEngine.Random.Range(-4, 4));
-        agent.Warp(newPosition);
+        navMeshAgent.Warp(newPosition);
     }
-
-    void Update()
-    {
-
-        Attack();
-        if (health <= 0)
-        {
-            OnDead?.Invoke(1);  //el signo ? es para preguntarse si hay suscriptores al evento, sino da error
-            Destroy(gameObject);           
-
-        }
-
-
-    }
+       
 }
