@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62230a26c4b04b040a8b6fb25d44c2f8, type: 3}
   m_Name: BaseEnemy
   m_EditorClassIdentifier: 
-  life: 110
+  life: 90
   damageCooldown: 1
   damage: 25
   speed: 4
+  trackDistance: 15
+  wanderTime: 3

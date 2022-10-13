@@ -16,3 +16,5 @@ MonoBehaviour:
   damageCooldown: 1
   damage: 33
   speed: 7
+  trackDistance: 15
+  wanderTime: 2

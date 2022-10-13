@@ -13,9 +13,7 @@ public class SimpleKey : MonoBehaviour
         red, green, blue
     }
     public UnityEvent onPickedUp;
-    public UnityEvent onRedKeyActivation;
-    public UnityEvent onBlueKeyActivation;
-    public UnityEvent onGreenKeyActivation;
+    
     void Start()
     {
         light = GetComponent<Light>();
@@ -26,6 +24,8 @@ public class SimpleKey : MonoBehaviour
                     case color.blue: light.color = Color.blue; break;
                 default: light.color = Color.white; break;
         }
+
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -40,21 +40,13 @@ public class SimpleKey : MonoBehaviour
         {
             onPickedUp.Invoke();
             gameObject.SetActive(false);
-
-            switch (keyColor)
-            {
-                case color.red:
-                    onRedKeyActivation.Invoke();
-                    break;
-                case color.green:
-                    onGreenKeyActivation.Invoke();
-                    break;
-                case color.blue:
-                    onBlueKeyActivation.Invoke();
-                    break;
-                default:  break;
-            }
+                        
         }
 
+    }
+
+    public void Spawn()
+    {
+        gameObject.SetActive(true);
     }
 }
