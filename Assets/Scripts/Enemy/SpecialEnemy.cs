@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 
+
 public class SpecialEnemy : EnemyBehaviour
 {
-    new static public event Action<int> OnDead;
+    //new static public event Action<int> OnDead;
     public override void RecieveDamage(float damage)
     {
         health -= damage;
@@ -18,6 +19,9 @@ public class SpecialEnemy : EnemyBehaviour
     {
         Vector3 newPosition = transform.position -  new Vector3(UnityEngine.Random.Range(-4, 4), 0, UnityEngine.Random.Range(-4, 4));
         navMeshAgent.Warp(newPosition);
+        sound.clip = monsterClips[(int)monsterSounds.Warp];
+        sound.pitch = (UnityEngine.Random.Range(0.8f, 1f));
+        sound.Play();
     }
        
 }

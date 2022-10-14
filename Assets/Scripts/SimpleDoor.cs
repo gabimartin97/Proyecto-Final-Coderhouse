@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class SimpleDoor : MonoBehaviour
 {
+    private AudioSource sound;
     public bool rotate = false;
     bool isOpen = false;
     Transform hingeTransform;
     // Start is called before the first frame update
     void Start()
     {
+        sound = GetComponent<AudioSource>();
         hingeTransform = transform.Find("Hinge");
     }
 
@@ -38,11 +40,13 @@ public class SimpleDoor : MonoBehaviour
         {
             transform.RotateAround(hingeTransform.position, Vector3.up, -90f);
             isOpen = true;
+            sound.Play();
         }
         else
         {
             transform.RotateAround(hingeTransform.position, Vector3.up, 90f);
             isOpen = false;
         }
+
     }
 }

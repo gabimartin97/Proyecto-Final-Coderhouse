@@ -8,6 +8,19 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] protected EnemyData data;
     [SerializeField] Animator enemyAnimator;
 
+    [SerializeField] protected AudioClip[] monsterClips;
+
+    protected AudioSource sound;
+    protected enum monsterSounds
+    {
+        Growl,
+        Damage,
+        Attack,
+        Warp,
+        Death,
+        count
+    }
+
     protected float health;
     protected float damage;
     protected float damageCooldown;
@@ -21,6 +34,7 @@ public class EnemyBehaviour : MonoBehaviour
     static public event Action<int> OnDead;
     void Start()
     {
+        sound = GetComponent<AudioSource>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player");
 
@@ -54,6 +68,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (health <= 0)
         {
             OnDead?.Invoke(1); //el signo ? es para preguntarse si hay suscriptores al evento, sino da error
+            SoundsManager.PlaySound(monsterClips[(int)monsterSounds.Death]);
             Destroy(gameObject);
             
         }
@@ -73,7 +88,10 @@ public class EnemyBehaviour : MonoBehaviour
     public virtual void RecieveDamage(float damage)
     {
         health -= damage;
-        
+        sound.clip = monsterClips[(int)monsterSounds.Damage];
+        sound.pitch = (UnityEngine.Random.Range(0.8f, 1f));
+        sound.Play();
+
     }
 
     protected void Attack(Collision collision)
@@ -83,6 +101,9 @@ public class EnemyBehaviour : MonoBehaviour
             collision.gameObject.GetComponent<PlayerBehaviour>().RecieveDamage(damage);
             isAttacking = true;
             damageInCooldown = true;
+            sound.clip = monsterClips[(int)monsterSounds.Attack];
+            sound.pitch = (UnityEngine.Random.Range(0.8f, 1f));
+            sound.Play();
         }
     }
 

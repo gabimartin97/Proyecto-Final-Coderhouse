@@ -8,6 +8,7 @@ public class SimpleKey : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] color keyColor;
     private Light light;
+    private AudioSource sound;
     enum color
     {
         red, green, blue
@@ -16,6 +17,7 @@ public class SimpleKey : MonoBehaviour
     
     void Start()
     {
+        sound = GetComponent<AudioSource>();
         light = GetComponent<Light>();
         switch (keyColor)
         {
@@ -48,5 +50,6 @@ public class SimpleKey : MonoBehaviour
     public void Spawn()
     {
         gameObject.SetActive(true);
+        sound.Play();
     }
 }
