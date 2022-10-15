@@ -11,7 +11,7 @@ public class EnemyData : ScriptableObject
     public float life = 100f;
 
     [SerializeField]
-    [Range(0.1f, 10f)]
+    [Range(2f, 10f)]
     public float damageCooldown = 5f;
 
     [SerializeField]

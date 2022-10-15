@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.AI;
+using System.Collections;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -60,7 +61,7 @@ public class EnemyBehaviour : MonoBehaviour
             if (damageCooldownTimer >= damageCooldown)
             {
                 damageInCooldown = false;
-                isAttacking = false;
+                
                 damageCooldownTimer = 0f;                
             }
         }
@@ -80,8 +81,8 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Attack(collision);
-            
+            StartCoroutine(Attack(collision.gameObject));
+                        
         }
     }
 
@@ -94,17 +95,23 @@ public class EnemyBehaviour : MonoBehaviour
 
     }
 
-    protected void Attack(Collision collision)
+    protected IEnumerator Attack(GameObject target)
     {
-        if (!damageInCooldown)
+        if (!damageInCooldown && !isAttacking)
         {
-            collision.gameObject.GetComponent<PlayerBehaviour>().RecieveDamage(damage);
+            
             isAttacking = true;
             damageInCooldown = true;
             sound.clip = monsterClips[(int)monsterSounds.Attack];
             sound.pitch = (UnityEngine.Random.Range(0.8f, 1f));
             sound.Play();
+            yield return new WaitForSeconds(0.4f);
+            target.GetComponent<PlayerBehaviour>().RecieveDamage(damage/2f);
+            yield return new WaitForSeconds(0.3f);
+            target.GetComponent<PlayerBehaviour>().RecieveDamage(damage / 2f);
+            isAttacking = false;
         }
+        
     }
 
     protected void Move()
@@ -148,7 +155,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
         enemyAnimator.SetBool("isAttacking", false);
         }
-        if (navMeshAgent.remainingDistance >= 0.5)
+        if (navMeshAgent.remainingDistance >= 0.5 && !isAttacking)
         {
             enemyAnimator.SetBool("isRunning", true);
 

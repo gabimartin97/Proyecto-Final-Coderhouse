@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EliteEnemy
   m_EditorClassIdentifier: 
   life: 100
-  damageCooldown: 1
+  damageCooldown: 2
   damage: 33
   speed: 7
   trackDistance: 15

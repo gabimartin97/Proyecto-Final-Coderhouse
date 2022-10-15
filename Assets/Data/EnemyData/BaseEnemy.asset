@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BaseEnemy
   m_EditorClassIdentifier: 
   life: 90
-  damageCooldown: 1
+  damageCooldown: 2
   damage: 25
   speed: 4
   trackDistance: 15
