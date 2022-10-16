@@ -14,6 +14,8 @@ public class PlayerBehaviour : MonoBehaviour
     private float maxHealth = 100f;
     static public event Action OnDead;
     static public event Action<float, float> OnHealthChange;
+    static public event Action<int> OnWeaponPickedUp;  // 1 -> pistol 2-> yellowRifle 3-> shotgun
+    static public event Action<int> OnWeaponInHand; // 1 -> pistol 2-> yellowRifle 3-> shotgun
     public float Health { get => health; set => health = value; }
 
     // Start is called before the first frame update
@@ -67,6 +69,11 @@ public class PlayerBehaviour : MonoBehaviour
            GameObject pickedUpWeapon = collision.gameObject;
             pickedUpWeapon.SetActive(false);
             weaponList.Add(pickedUpWeapon);
+
+            //HUD
+            if (pickedUpWeapon.name == "Pistol") OnWeaponPickedUp?.Invoke(1);
+            if (pickedUpWeapon.name == "YellowRifle") OnWeaponPickedUp?.Invoke(2);
+            if (pickedUpWeapon.name == "Shotgun") OnWeaponPickedUp?.Invoke(3);
         }
     }
 
@@ -80,7 +87,12 @@ public class PlayerBehaviour : MonoBehaviour
         weapon.GetComponent<Gun>().enabled = true;
         weapon.GetComponent<Gun>().PlayerRb = GetComponent<Rigidbody>();
         weaponInHand = weapon;
-       
+
+        //HUD
+        if (weaponInHand.name == "Pistol") OnWeaponInHand?.Invoke(1);
+        if (weaponInHand.name == "YellowRifle") OnWeaponInHand?.Invoke(2);
+        if (weaponInHand.name == "Shotgun") OnWeaponInHand?.Invoke(3);
+
     }
     private void DisableAllWeapon()
     {
