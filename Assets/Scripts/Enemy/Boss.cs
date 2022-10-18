@@ -20,10 +20,15 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(playerTarget);
+        // transform.LookAt(playerTarget);
+        // Calculate the direction
+        var direction = playerTarget.position - transform.position;
+        direction.y = 0;
+        // Make the transform look in the direction.
+        transform.forward = direction;
     }
     void Spawns()
     {
-        Instantiate(Proyectile, transform.position + Vector3.up*5 + Vector3.forward*5, transform.rotation);
+        Instantiate(Proyectile, transform.position, transform.rotation);
     }
 }

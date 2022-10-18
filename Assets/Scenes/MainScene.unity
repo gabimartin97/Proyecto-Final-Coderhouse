@@ -8957,7 +8957,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5876166285811797289, guid: 7956997e836610b479db7fd9a464a83d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -52.95
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5876166285811797289, guid: 7956997e836610b479db7fd9a464a83d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8965,7 +8965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5876166285811797289, guid: 7956997e836610b479db7fd9a464a83d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -51.82
+      value: 284.8
       objectReference: {fileID: 0}
     - target: {fileID: 5876166285811797289, guid: 7956997e836610b479db7fd9a464a83d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -45608,7 +45608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2074076624}
   m_LocalRotation: {x: 0.70090926, y: 0.000000058073407, z: -0.00000005706858, w: 0.7132505}
-  m_LocalPosition: {x: -52.95, y: 8.518478, z: -51.99453}
+  m_LocalPosition: {x: 0.00000056762786, y: 8.5184765, z: 284.6255}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47122,7 +47122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131351208}
   m_LocalRotation: {x: 0.70090926, y: 0.000000058073407, z: -0.00000005706858, w: 0.7132505}
-  m_LocalPosition: {x: -52.95, y: 8.518478, z: -51.99453}
+  m_LocalPosition: {x: 0.00000056762786, y: 8.5184765, z: 284.6255}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47524,9 +47524,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 313511447889901129, guid: 5984658703c39e84f901376e638dcfa5, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 313511447889901135, guid: 5984658703c39e84f901376e638dcfa5, type: 3}
       propertyPath: time
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 313511447889901135, guid: 5984658703c39e84f901376e638dcfa5, type: 3}
+      propertyPath: repeatRate
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 313511447889901135, guid: 5984658703c39e84f901376e638dcfa5, type: 3}
       propertyPath: playerTarget
