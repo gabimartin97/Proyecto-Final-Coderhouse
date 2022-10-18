@@ -79,9 +79,9 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") )
         {
-            StartCoroutine(Attack(collision.gameObject));
+           if(!isAttacking) StartCoroutine(Attack(collision.gameObject));
                         
         }
     }
@@ -121,7 +121,7 @@ public class EnemyBehaviour : MonoBehaviour
             Vector3 direction = target.transform.position - transform.position;
             if (direction.magnitude <= data.trackDistance)
             {
-                if (direction.magnitude >= 2f)
+                if (direction.magnitude >= 0.5f)
                 {
                     navMeshAgent.SetDestination(target.transform.position);
                 }
