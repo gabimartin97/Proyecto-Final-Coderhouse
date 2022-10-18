@@ -9,6 +9,8 @@ public class Boss : MonoBehaviour
     [SerializeField][Range(1f, 20f)] float time = 1f;
     [SerializeField][Range(1f, 30f)] float repeatRate = 10f;
 
+    [SerializeField] int bossLife = 3000;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,6 @@ public class Boss : MonoBehaviour
     }
     void Spawns()
     {
-        Instantiate(Proyectile, transform.position, transform.rotation);
+        Instantiate(Proyectile, transform.position + Vector3.up*5 + Vector3.forward*5, transform.rotation);
     }
 }
