@@ -6,8 +6,8 @@ public class Boss : MonoBehaviour
 {
     [SerializeField] Transform playerTarget;
     [SerializeField] GameObject Proyectile;
-    [SerializeField][Range(1f, 20f)] float time = 1f;
-    [SerializeField][Range(1f, 30f)] float repeatRate = 10f;
+    [SerializeField][Range(1f, 20f)] float time = 5f;
+    [SerializeField][Range(1f, 30f)] float repeatRate = 5f;
 
     [SerializeField] int bossLife = 3000;
 
@@ -20,15 +20,17 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // transform.LookAt(playerTarget);
-        // Calculate the direction
-        var direction = playerTarget.position - transform.position;
-        direction.y = 0;
-        // Make the transform look in the direction.
-        transform.forward = direction;
+        transform.LookAt(playerTarget);
     }
     void Spawns()
     {
-        Instantiate(Proyectile, transform.position, transform.rotation);
+        Instantiate(Proyectile, transform.position + Vector3.up * 5 + Vector3.forward * 5, transform.rotation);
+    }
+    void LastForm()
+    {
+        if (bossLife <= 1000)
+        {
+            repeatRate = 2f;
+        }
     }
 }
