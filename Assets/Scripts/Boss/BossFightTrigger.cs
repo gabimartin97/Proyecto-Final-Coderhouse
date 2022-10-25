@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossActive : MonoBehaviour
+public class BossFightTrigger : MonoBehaviour
 {
     public GameObject bossFight;
     // Start is called before the first frame update

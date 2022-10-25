@@ -10,6 +10,7 @@ public class HUDManager : MonoBehaviour
     [SerializeField] GameObject pointsIndicatorObject;
     [SerializeField] GameObject healthBarObject;
     [SerializeField] GameObject gameOverObject;
+    [SerializeField] GameObject gameWinObject;
     [SerializeField] GameObject weaponImageObject;
     [SerializeField] GameObject[] weaponSlots;
     [SerializeField] Sprite[] weaponImages;
@@ -24,6 +25,9 @@ public class HUDManager : MonoBehaviour
         PlayerBehaviour.OnHealthChange += OnHealthChangeManager;  //Me suscribo al evento
         PlayerBehaviour.OnWeaponInHand += OnWeapoinInHandManager; //Me suscribo al evento
         PlayerBehaviour.OnWeaponPickedUp += OnWeaponPickedUpManager; //Me suscribo al evento
+        PlayerBehaviour.OnDead += OnplayerDeath;
+        BossBehaviour.OnDead += OnBossDeath;
+
         pointsText = pointsIndicatorObject.GetComponent<TextMeshProUGUI>();
         healthBar = healthBarObject.GetComponent<Slider>();
         weaponImageObject.SetActive(false);
@@ -38,7 +42,7 @@ public class HUDManager : MonoBehaviour
 
         pointsText.SetText(GameManager.Score.ToString());
 
-        if (GameManager.IsGameOver) gameOverObject.SetActive(true);
+        
     }
     private void OnHealthChangeManager(float actualHealth, float totalHealth)
     {
@@ -58,5 +62,14 @@ public class HUDManager : MonoBehaviour
         weaponSlots[weaponNumber - 1].GetComponent<Image>().color = Color.white;
         
     }
+    private void OnBossDeath()
+    {
+        gameWinObject.SetActive(true);
+    }
+    private void OnplayerDeath()
+    {
+        gameOverObject.SetActive(true);
+    }
+
 
 }

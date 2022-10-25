@@ -42,7 +42,12 @@ public class BulletBehaviour : MonoBehaviour
                 collision.gameObject.GetComponent<EnemyBehaviour>().RecieveDamage(damage);
             }
 
+            if (collision.gameObject.CompareTag("Boss"))
+            {
+                Transform collisionTransform = collision.transform;
 
+                collision.gameObject.GetComponent<BossBehaviour>().RecieveDamage(damage);
+            }
             Destroy();
         }
 
