@@ -61,6 +61,11 @@ public class BossBehaviour : MonoBehaviour
             Destroy(gameObject);
 
         }
+
+        if(GameManager.IsGameOver)
+        {
+            CancelInvoke("Spawns");
+        }
     }
     void Spawns()
     {

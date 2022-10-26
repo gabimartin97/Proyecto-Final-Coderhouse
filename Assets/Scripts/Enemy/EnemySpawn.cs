@@ -24,7 +24,8 @@ public class EnemySpawn : MonoBehaviour
         }
     }
     void Spawns()
-    {
+    {   
+        if(!GameManager.IsGameOver && !GameManager.IsGameWin)
         Instantiate(Spawned, transform.position, transform.rotation);
     }
 }

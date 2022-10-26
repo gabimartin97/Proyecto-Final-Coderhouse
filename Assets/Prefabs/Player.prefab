@@ -130,6 +130,7 @@ MonoBehaviour:
   weaponInHand: {fileID: 0}
   weaponHand: {fileID: 3005974737983392178}
   weaponList: []
+  body: {fileID: 7129264891010980647}
 --- !u!81 &1599206607
 AudioListener:
   m_ObjectHideFlags: 0
@@ -207,6 +208,11 @@ Transform:
 --- !u!4 &7129264891010484053 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3700892580312420668, guid: 6b4e62797f867fa4dbae445fcf04be2b, type: 3}
+  m_PrefabInstance: {fileID: 5885090447247709801}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7129264891010980647 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3700892580312059214, guid: 6b4e62797f867fa4dbae445fcf04be2b, type: 3}
   m_PrefabInstance: {fileID: 5885090447247709801}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &7129264891018275047 stripped

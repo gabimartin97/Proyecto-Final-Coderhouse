@@ -7,7 +7,7 @@ public class SimpleKey : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] color keyColor;
-    private Light light;
+    private new Light light;
     private AudioSource sound;
     enum color
     {

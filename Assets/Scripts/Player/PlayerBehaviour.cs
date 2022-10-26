@@ -9,9 +9,11 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] GameObject weaponInHand;
     [SerializeField] Transform weaponHand;
     [SerializeField] List<GameObject> weaponList;
+    [SerializeField] GameObject body;
 
     private float health = 100f;
     private float maxHealth = 100f;
+    private bool isDead = false;
     static public event Action OnDead;
     static public event Action<float, float> OnHealthChange;
     static public event Action<int> OnWeaponPickedUp;  // 1 -> pistol 2-> yellowRifle 3-> shotgun
@@ -30,8 +32,16 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (health <= 0f)
         {
-            OnDead?.Invoke();
-            gameObject.SetActive(false);
+
+            if (!isDead)
+            {
+                isDead = true;
+                OnDead?.Invoke();
+            }
+
+            
+            //gameObject.SetActive(false);
+            body.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))

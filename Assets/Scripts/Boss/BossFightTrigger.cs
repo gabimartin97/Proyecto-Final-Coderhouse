@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BossFightTrigger : MonoBehaviour
 {
     public GameObject bossFight;
+    static public event Action OnBossFightStart;
+    private bool isBossfight = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +26,14 @@ public class BossFightTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            bossFight.SetActive(true);
+            if(!isBossfight)
+            {
+                OnBossFightStart?.Invoke();
+                bossFight.SetActive(true);
+                isBossfight = true;
+            }
+            
+
 
         }
     }

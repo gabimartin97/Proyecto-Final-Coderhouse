@@ -81,7 +81,16 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") )
         {
-           if(!isAttacking) StartCoroutine(Attack(collision.gameObject));
+            if((!GameManager.IsGameOver || !GameManager.IsGameWin))
+            {
+                if (!isAttacking)
+                    StartCoroutine(Attack(collision.gameObject));
+            }
+            else
+            {
+                isAttacking = false;
+            }
+           
                         
         }
     }
@@ -116,7 +125,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     protected void Move()
     {
-        if (!GameManager.IsGameOver)
+        if (!GameManager.IsGameOver && !GameManager.IsGameWin)
         {
             Vector3 direction = target.transform.position - transform.position;
             if (direction.magnitude <= data.trackDistance)
@@ -136,6 +145,10 @@ public class EnemyBehaviour : MonoBehaviour
                 }
 
             }
+        }
+        else
+        {
+            navMeshAgent.ResetPath();
         }
     }
 

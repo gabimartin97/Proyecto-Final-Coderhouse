@@ -16,9 +16,13 @@ public class PlayerAim_Move : MonoBehaviour
 
     private void Update()
     {
-        Aim();
-        Walk();
-        SetState();
+        if (!GameManager.IsGameOver && !GameManager.IsGameWin)
+        {
+            Aim();
+            Walk();
+            SetState();
+        }
+        
     }
 
 
