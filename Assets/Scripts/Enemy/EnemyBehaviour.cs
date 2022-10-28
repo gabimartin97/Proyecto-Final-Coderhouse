@@ -39,12 +39,46 @@ public class EnemyBehaviour : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player");
 
-        health = data.life;
-        damage = data.damage;
-        damageCooldown = data.damageCooldown;
-        speed = data.speed;
+        float difficultyDmgMultiplyer = 1f;
+        float difficultySpeedMultiplyer = 1f;
+        float difficultyHPMultiplyer = 1f;
+        float difficultyDamageCDModifier = 0f;
+
+        switch (GameManager.DifficultyLevel)
+        {
+            
+            case 0:
+                case 1:
+                
+                break;
+
+                case 2:
+                difficultyDmgMultiplyer = 1.5f;
+                difficultySpeedMultiplyer = 1.4f;
+                difficultyHPMultiplyer = 1.2f;
+                difficultyDamageCDModifier = 0.5f;
+                break;
+            case 3:
+                difficultyDmgMultiplyer = 2.0f;
+                difficultySpeedMultiplyer = 1.8f;
+                difficultyHPMultiplyer = 1.5f;
+                difficultyDamageCDModifier = 1.0f;
+                break;
+                default:
+                break;
+        }
+
+        health = data.life * difficultyHPMultiplyer;
+        damage = data.damage * difficultyDmgMultiplyer;
+        damageCooldown = data.damageCooldown - difficultyDamageCDModifier;
+        speed = data.speed * difficultySpeedMultiplyer;
+
         navMeshAgent.speed = speed;
-              
+        
+
+
+
+
     }
 
     // Update is called once per frame
